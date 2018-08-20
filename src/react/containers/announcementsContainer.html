@@ -1,0 +1,45 @@
+<script type="text/babel">
+  class Announcement extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+        firstMessage: "Initial Message",
+        secondMessage: "",
+        thirdMessage: ""
+      }
+      this.setSecondMessage = this.setSecondMessage.bind(this);
+      this.getTeamMessage = this.getTeamMessage.bind(this);
+      this.setTeamMessage = this.setTeamMessage.bind(this);
+    }
+    
+    componentDidMount() {
+      google.script.run.withSuccessHandler(this.setOldMessage).getSecondAnnouncement();
+    }
+    
+    setSecondMessage(value) {
+      console.log(value);
+      this.setState({secondMessage: value});
+    }
+    
+    getThirdMessage() {
+      google.script.run.withSuccessHandler(this.setThirdMessage).getThirdAnnouncement();
+    }
+    
+    setThirdMessage(value) {
+      console.log(value);
+      this.setState({thirdMessage: value});
+    }
+    
+    render () {
+      return (
+        <div>
+          <h2>Hello! Click the button to get a new team announcement.</h2>
+          <h3>{this.state.firstMessage}</h3>
+          <button type="button" onClick={this.getTeamMessage}>Get Message!</button>
+          <Component1 />
+          <Component2 passingValue={this.state.teamMessage}/>
+        </div>
+      );
+    }
+  }
+</script>

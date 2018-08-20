@@ -33,10 +33,10 @@
     render () {
       return (
         <div>
-          <h2>Example - Initial State</h2>
-          <h3>{this.state.firstMessage}</h3>
+          <h1>Example - Initial State</h1>
+          <p>{this.state.firstMessage}</p>
           <Component1 />
-          <h3>{this.state.secondMessage}</h3>
+          <p>{this.state.secondMessage}</p>
           <Component2 passingValue={this.state.thirdMessage}/>
           <button type="button" onClick={this.getThirdMessage}>Get Message!</button>
         </div>

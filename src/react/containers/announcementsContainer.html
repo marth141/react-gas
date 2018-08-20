@@ -1,46 +1,46 @@
 <script type="text/babel">
-class Announcement extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      firstMessage: "Initial Message",
-      secondMessage: "",
-      thirdMessage: ""
+  class Announcement extends React.Component {
+    constructor() {
+      super();
+      this.state = {
+        firstMessage: "Initial Message",
+        secondMessage: "",
+        thirdMessage: ""
+      }
+      this.setSecondMessage = this.setSecondMessage.bind(this);
+      this.getThirdMessage = this.getThirdMessage.bind(this);
+      this.setThirdMessage = this.setThirdMessage.bind(this);
     }
-    this.setSecondMessage = this.setSecondMessage.bind(this);
-    this.getThirdMessage = this.getThirdMessage.bind(this);
-    this.setThirdMessage = this.setThirdMessage.bind(this);
-  }
+      
+    componentDidMount() {
+      google.script.run.withSuccessHandler(this.setSecondMessage).getSecondAnnouncement();
+    }
     
-  componentDidMount() {
-    google.script.run.withSuccessHandler(this.setSecondMessage).getSecondAnnouncement();
+    setSecondMessage(value) {
+      console.log(value);
+      this.setState({secondMessage: value});
+    }
+      
+    getThirdMessage() {
+      google.script.run.withSuccessHandler(this.setThirdMessage).getThirdAnnouncement();
+    }
+      
+    setThirdMessage(value) {
+      console.log(value);
+      this.setState({thirdMessage: value});
+    }
+      
+    render () {
+      return (
+        <div>
+          <h2>Example - Initial State</h2>
+          <h3>{this.state.firstMessage}</h3>
+          <Component1 />
+          <h3>{this.state.secondMessage}</h3>
+          <Component2 passingValue={this.state.thirdMessage}/>
+          <button type="button" onClick={this.getThirdMessage}>Get Message!</button>
+        </div>
+      );
+    }
   }
-  
-  setSecondMessage(value) {
-    console.log(value);
-    this.setState({secondMessage: value});
-  }
-    
-  getThirdMessage() {
-    google.script.run.withSuccessHandler(this.setThirdMessage).getThirdAnnouncement();
-  }
-    
-  setThirdMessage(value) {
-    console.log(value);
-    this.setState({thirdMessage: value});
-  }
-    
-  render () {
-    return (
-      <div>
-        <h2>Example - Initial State</h2>
-        <h3>{this.state.firstMessage}</h3>
-        <Component1 />
-        <h3>{this.state.secondMessage}</h3>
-        <Component2 passingValue={this.state.thirdMessage}/>
-        <button type="button" onClick={this.getThirdMessage}>Get Message!</button>
-      </div>
-    );
-  }
-}
 </script>
